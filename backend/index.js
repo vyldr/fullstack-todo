@@ -34,7 +34,22 @@ app.get('/api/todos', (req, res) => {
             return res.status(200).send(dbres.rows);
         }
     });
-})
+});
+
+// Add a new item
+app.get('/api/addItem', (req, res) => {
+    var query = "INSERT INTO todos (checked, content) values ('f', '');";
+    var values = [];
+
+    database.query(query, values, (err) => {
+        if (err) {
+            console.log(err.stack);
+            return res.status(500).send();
+        } else {
+            return res.status(200).send();
+        }
+    });
+});
 
 
 // Serve static files from a directory

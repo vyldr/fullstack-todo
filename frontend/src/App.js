@@ -10,6 +10,9 @@ class App extends React.Component {
         this.state = {
             items: []
         };
+
+        this.addItem = this.addItem.bind(this);
+        this.getList = this.getList.bind(this);
     }
 
     componentDidMount() {
@@ -30,6 +33,13 @@ class App extends React.Component {
             )
     }
 
+    addItem() {
+        fetch(document.location.href + 'api/addItem')
+            .then(() => {
+                this.getList();
+            })
+    }
+
     render() {
         return (
             <div className='App'>
@@ -46,6 +56,7 @@ class App extends React.Component {
                         />
                     ))}
                 </div>
+                <button onClick={this.addItem} >Add</button>
             </div>
         );
     }
