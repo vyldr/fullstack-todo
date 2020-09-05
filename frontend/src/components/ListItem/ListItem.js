@@ -4,8 +4,9 @@ class ListItem extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            id: 0,
-            todoText: '',
+            id: props.id,
+            checked: props.checked,
+            content: props.content,
         };
 
         // Edit the text box
@@ -14,16 +15,16 @@ class ListItem extends React.Component {
 
     // Update the todoText
     handleChange(event) {
-        this.setState({ todoText: event.target.value });
+        this.setState({ content: event.target.value });
     }
 
     render() {
         return (
-            <div>
+            <div className='ListItem'>
 
                 {/* Text for the to-do item */}
                 <input type='text'
-                    value={this.state.todoText}
+                    value={this.state.content}
                     onChange={this.handleChange}>
                 </input>
 
