@@ -68,7 +68,22 @@ app.delete('/api/deleteItem', (req, res) => {
             return res.status(200).send();
         }
     });
-})
+});
+
+// Update an item
+app.post('/api/saveItem', (req, res) => {
+    var query = 'UPDATE todos SET content = $1 WHERE item_id = $2;';
+    var values = [req.body.content, req.body.id];
+
+    database.query(query, values, (err) => {
+        if (err) {
+            console.log(err.stack);
+            return res.status(500).send();
+        } else {
+            return res.status(200).send();
+        }
+    });
+});
 
 
 // Serve static files from a directory

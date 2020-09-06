@@ -8,17 +8,21 @@ class ListItem extends React.Component {
             checked: props.checked,
             content: props.content,
             getList: props.getList,
+            edited: false,
         };
 
-        // Edit the text box
+        // Bind functions
         this.handleChange = this.handleChange.bind(this);
-
         this.deleteItem = this.deleteItem.bind(this);
+        this.saveItem = this.saveItem.bind(this);
     }
 
-    // Update the todoText
+    // Edit the todoText
     handleChange(event) {
-        this.setState({ content: event.target.value });
+        this.setState({
+            content: event.target.value,
+            edited: true
+        });
     }
 
     // Delete the todo item from the server
@@ -34,6 +38,22 @@ class ListItem extends React.Component {
         });
     }
 
+    // Save changes to an item
+    saveItem() {
+        fetch(document.location.href + 'api/saveItem', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                content: this.state.content,
+                id: this.state.id
+            }),
+        }).then(() => {
+            this.setState({ edited: false });
+        });
+    }
+
     render() {
         return (
             <div className='ListItem'>
@@ -46,8 +66,11 @@ class ListItem extends React.Component {
 
                 {/* Buttons to manage the item */}
                 <button>Done</button>
-                <button>Save</button>
-                <button>Edit</button>
+                <button
+                    disabled={!this.state.edited}
+                    onClick={this.saveItem}>
+                    Save
+                </button>
                 <button onClick={this.deleteItem}>Delete</button>
             </div>
         );
