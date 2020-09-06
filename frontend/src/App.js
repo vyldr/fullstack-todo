@@ -25,6 +25,7 @@ class App extends React.Component {
             .then(res => res.json())
             .then(
                 (result) => {
+                    result.sort((a, b) => a.item_id - b.item_id);
                     console.log(result);
                     this.setState({
                         items: result
