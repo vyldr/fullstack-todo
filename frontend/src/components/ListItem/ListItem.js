@@ -12,17 +12,34 @@ class ListItem extends React.Component {
         };
 
         // Bind functions
-        this.handleChange = this.handleChange.bind(this);
+        this.inputChange = this.inputChange.bind(this);
+        this.checkboxChange = this.checkboxChange.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
         this.saveItem = this.saveItem.bind(this);
     }
 
     // Edit the todoText
-    handleChange(event) {
+    inputChange(event) {
         this.setState({
             content: event.target.value,
             edited: true
         });
+    }
+
+    // Toggle the checkbox
+    checkboxChange(event) {
+        this.setState({
+            checked: !this.state.checked
+        });
+
+        fetch(document.location.href + 'api/checkItem', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id: this.state.id }),
+        });
+
     }
 
     // Delete the todo item from the server
@@ -61,11 +78,14 @@ class ListItem extends React.Component {
                 {/* Text for the to-do item */}
                 <input type='text'
                     value={this.state.content}
-                    onChange={this.handleChange}>
+                    onChange={this.inputChange}>
                 </input>
 
                 {/* Buttons to manage the item */}
-                <button>Done</button>
+                <input
+                type='checkbox'
+                checked={this.state.checked}
+                onChange={this.checkboxChange}></input>
                 <button
                     disabled={!this.state.edited}
                     onClick={this.saveItem}>

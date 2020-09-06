@@ -85,6 +85,21 @@ app.post('/api/saveItem', (req, res) => {
     });
 });
 
+// Toggle a checkbox
+app.post('/api/checkItem', (req, res) => {
+    var query = 'UPDATE todos SET checked = NOT checked WHERE item_id = $1;';
+    var values = [req.body.id];
+
+    database.query(query, values, (err) => {
+        if (err) {
+            console.log(err.stack);
+            return res.status(500).send();
+        } else {
+            return res.status(200).send();
+        }
+    });
+});
+
 
 // Serve static files from a directory
 app.use(express.static('./public'));
