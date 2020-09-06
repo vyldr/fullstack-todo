@@ -37,7 +37,7 @@ class App extends React.Component {
         fetch(document.location.href + 'api/addItem')
             .then(() => {
                 this.getList();
-            })
+            });
     }
 
     render() {
@@ -53,6 +53,7 @@ class App extends React.Component {
                             id={item.item_id}
                             checked={item.checked}
                             content={item.content}
+                            getList={this.getList}
                         />
                     ))}
                 </div>

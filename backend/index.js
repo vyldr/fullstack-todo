@@ -1,5 +1,6 @@
 const http = require('http');
 const express = require('express');
+var bodyParser = require('body-parser');
 
 // Set the port
 const PORT = process.env.PORT || 3001;
@@ -7,6 +8,7 @@ const PORT = process.env.PORT || 3001;
 // Create the server
 const app = express();
 const httpServer = http.createServer(app);
+app.use(bodyParser.json());
 
 // Set up the database
 const { Client } = require('pg');
@@ -50,6 +52,23 @@ app.get('/api/addItem', (req, res) => {
         }
     });
 });
+
+// Delete an item
+app.delete('/api/deleteItem', (req, res) => {
+    var query = 'DELETE FROM todos WHERE item_id = $1;';
+    var values = [req.body.id];
+
+    console.log('Deleting ' + req.body.id);
+
+    database.query(query, values, (err) => {
+        if (err) {
+            console.log(err.stack);
+            return res.status(500).send();
+        } else {
+            return res.status(200).send();
+        }
+    });
+})
 
 
 // Serve static files from a directory
