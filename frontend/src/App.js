@@ -8,11 +8,14 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            items: []
+            items: [],
+            filter: null
         };
 
+        // Bind functions
         this.addItem = this.addItem.bind(this);
         this.getList = this.getList.bind(this);
+        this.setFilter = this.setFilter.bind(this);
     }
 
     componentDidMount() {
@@ -41,10 +44,21 @@ class App extends React.Component {
             });
     }
 
+    // Set which items to filter
+    setFilter(filter) {
+        this.setState({ filter: filter });
+    }
+
     render() {
         return (
             <div className='App'>
                 <h1>To-Do List</h1>
+
+                <div className='FilterButtons'>
+                    <button onClick={() => this.setFilter(null)}>All</button>
+                    <button onClick={() => this.setFilter(false)}>Checked</button>
+                    <button onClick={() => this.setFilter(true)}>Unchecked</button>
+                </div>
 
                 {/* Create an entry for each todo item */}
                 <div className='List'>
@@ -54,6 +68,7 @@ class App extends React.Component {
                             id={item.item_id}
                             checked={item.checked}
                             content={item.content}
+                            filter={this.state.filter}
                             getList={this.getList}
                         />
                     ))}

@@ -1,4 +1,5 @@
 import React from 'react';
+import './ListItem.css';
 
 class ListItem extends React.Component {
     constructor(props) {
@@ -73,7 +74,8 @@ class ListItem extends React.Component {
 
     render() {
         return (
-            <div className='ListItem'>
+            // Apply the 'filtered' class if it should be filtered
+            <div className={`${'ListItem'} ${((this.props.filter === this.state.checked) ? 'filtered' : '')}`}>
 
                 {/* Text for the to-do item */}
                 <input type='text'
