@@ -77,23 +77,33 @@ class ListItem extends React.Component {
             // Apply the 'filtered' class if it should be filtered
             <div className={`${'ListItem'} ${((this.props.filter === this.state.checked) ? 'filtered' : '')}`}>
 
+                {/* Checkbox */}
+                <input
+                    type='checkbox' className='checkbox'
+                    checked={this.state.checked}
+                    onChange={this.checkboxChange}>
+                </input>
+
                 {/* Text for the to-do item */}
-                <input type='text'
+                <input
+                    type='text'
+                    className='TodoText'
                     value={this.state.content}
                     onChange={this.inputChange}>
                 </input>
 
                 {/* Buttons to manage the item */}
-                <input
-                type='checkbox'
-                checked={this.state.checked}
-                onChange={this.checkboxChange}></input>
                 <button
+                    className='SaveButton'
                     disabled={!this.state.edited}
                     onClick={this.saveItem}>
                     Save
                 </button>
-                <button onClick={this.deleteItem}>Delete</button>
+                <button
+                    className='DeleteButton'
+                    onClick={this.deleteItem}>
+                    Delete
+                </button>
             </div>
         );
     }

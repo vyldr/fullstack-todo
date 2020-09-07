@@ -55,9 +55,25 @@ class App extends React.Component {
                 <h1>To-Do List</h1>
 
                 <div className='FilterButtons'>
-                    <button onClick={() => this.setFilter(null)}>All</button>
-                    <button onClick={() => this.setFilter(false)}>Checked</button>
-                    <button onClick={() => this.setFilter(true)}>Unchecked</button>
+                    <span>Filter:</span>
+                    <button
+                        className='FilterButton'
+                        disabled={this.state.filter === null}
+                        onClick={() => this.setFilter(null)}>
+                        All
+                    </button>
+                    <button
+                        className='FilterButton'
+                        disabled={this.state.filter === false}
+                        onClick={() => this.setFilter(false)}>
+                        Checked
+                    </button>
+                    <button
+                        className='FilterButton'
+                        disabled={this.state.filter === true}
+                        onClick={() => this.setFilter(true)}>
+                        Unchecked
+                    </button>
                 </div>
 
                 {/* Create an entry for each todo item */}
@@ -73,7 +89,13 @@ class App extends React.Component {
                         />
                     ))}
                 </div>
-                <button onClick={this.addItem} >Add</button>
+
+                {/* Add a new item */}
+                <button
+                    className='AddButton'
+                    onClick={this.addItem} >
+                    Add Item
+                </button>
             </div>
         );
     }

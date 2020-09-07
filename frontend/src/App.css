@@ -1,4 +1,12 @@
 .App {
-  text-align: center;
+    text-align: center;
+    margin: 1rem;
 }
 
+.FilterButton {
+    margin: 0.2rem;
+}
+
+.AddButton {
+    margin: 0.4rem;
+}

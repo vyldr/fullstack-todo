@@ -1,3 +1,33 @@
+.ListItem {
+    display: flex;
+    align-items: center;
+    max-width: 40rem;
+    margin: auto;
+    margin-top: 0.4rem;
+    border-radius: 0.3rem;
+    padding: 0.1rem;
+    background-color: #00000033;
+}
+
+/* Hide filtered items */
 .filtered {
     display: none;
 }
+
+.TodoText {
+    flex: 1 1 auto;
+}
+
+/* Hide the save button when we don't need it */
+.SaveButton:disabled {
+    display: none;
+}
+
+.ListItem > button {
+    margin: 0.2rem;
+}
+
+.ListItem > input {
+    margin: 0.2rem;
+}
+
