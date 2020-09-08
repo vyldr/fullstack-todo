@@ -74,7 +74,6 @@ class ListItem extends React.Component {
 
     render() {
         return (
-            // Apply the 'filtered' class if it should be filtered
             <div className={`${'ListItem'} ${((this.props.filter === this.state.checked) ? 'filtered' : '')}`}>
 
                 {/* Checkbox */}
